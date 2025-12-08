@@ -3,7 +3,7 @@ CSV Interpolator Tools
 
 Bu klasörde iki farklı interpolasyon aracı bulunmaktadır:
 
-1. interpolator_standard.exe
+1. interpolator.exe
    - Kaynak kodu: main_standard.c
    - İşlev: CSV dosyasını okur ve 0.01s aralıklarla lineer interpolasyon yapar.
    - Özellik: Zaman kaydırması YAPMAZ. Veriler olduğu gibi işlenir.
@@ -18,3 +18,4 @@ Bu klasörde iki farklı interpolasyon aracı bulunmaktadır:
 Kullanım:
 Herhangi bir exe'yi çalıştırın ve girdi CSV dosyasının adını girin (örn: test_keyfi.csv).
 Pencere kapanmadan önce sonucu görebilmeniz için işlem sonunda duraklama eklenmiştir.
+
