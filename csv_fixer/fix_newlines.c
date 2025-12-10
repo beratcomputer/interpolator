@@ -63,33 +63,31 @@ void fix_newlines(const char *in_filename, const char *out_filename) {
 }
 
 int main(int argc, char *argv[]) {
-    if (argc < 2) {
-        printf("Usage: %s <input_file> [output_file]\n", argv[0]);
-        printf("If output_file is not specified, uses '<input_filename>_fixed.csv'\n");
-        return 1;
-    }
-
-    const char *in_file = argv[1];
+    char in_file[1024];
     char out_file[1024];
 
-    if (argc >= 3) {
-        snprintf(out_file, sizeof(out_file), "%s", argv[2]);
-    } else {
-        // Construct default output name
-        snprintf(out_file, sizeof(out_file), "%s_fixed.csv", in_file);
-        // Quick hack to remove extension from mid-string if happened? No, keep it simple.
-        // If input is "file.csv", output is "file.csv_fixed.csv". 
-        // A bit ugly but safe.
-        // Let's try to insert before extension if possible
-        /*
-        char *dot = strrchr(in_file, '.');
-        if (dot) {
-            int base_len = dot - in_file;
-            snprintf(out_file, sizeof(out_file), "%.*s_fixed%s", base_len, in_file, dot);
+    if (argc < 2) {
+        printf("Mode: Interactive\n");
+        printf("Please enter the input CSV filename (e.g., input.csv): ");
+        if (scanf("%1023s", in_file) != 1) {
+            printf("Invalid input.\n");
+            system("pause");
+            return 1;
         }
-        */
+        // Default output
+        snprintf(out_file, sizeof(out_file), "%s_fixed.csv", in_file);
+    } else {
+        snprintf(in_file, sizeof(in_file), "%s", argv[1]);
+        if (argc >= 3) {
+            snprintf(out_file, sizeof(out_file), "%s", argv[2]);
+        } else {
+            snprintf(out_file, sizeof(out_file), "%s_fixed.csv", in_file);
+        }
     }
 
     fix_newlines(in_file, out_file);
+    
+    printf("\nDone. Press any key to exit...\n");
+    system("pause");
     return 0;
 }
